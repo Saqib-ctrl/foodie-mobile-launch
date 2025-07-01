@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Header from "@/components/Header";
 import RestaurantCard from "@/components/RestaurantCard";
@@ -10,7 +9,7 @@ const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCuisine, setSelectedCuisine] = useState("All");
 
-  const cuisines = ["All", "Italian", "Chinese", "American", "Indian", "Japanese"];
+  const cuisines = ["All", "Italian", "Chinese", "American", "Indian", "Japanese", "Pakistani"];
 
   const filteredRestaurants = mockRestaurants.filter(restaurant => {
     const matchesSearch = restaurant.name.toLowerCase().includes(searchQuery.toLowerCase()) ||

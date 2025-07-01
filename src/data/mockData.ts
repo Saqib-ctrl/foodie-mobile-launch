@@ -67,6 +67,15 @@ export const mockRestaurants: Restaurant[] = [
     deliveryTime: "40-50 min",
     image: "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=500&h=300&fit=crop",
     featured: false
+  },
+  {
+    id: "6",
+    name: "Karachi Kitchen",
+    cuisine: "Pakistani",
+    rating: 4.8,
+    deliveryTime: "30-40 min",
+    image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=500&h=300&fit=crop",
+    featured: true
   }
 ];
 
@@ -113,6 +122,56 @@ export const mockMenuItems: { [key: string]: MenuItem[] } = {
       price: 12.99,
       image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=300&h=200&fit=crop",
       category: "Rice"
+    }
+  ],
+  "6": [
+    {
+      id: "6-1",
+      name: "Chicken Biryani",
+      description: "Aromatic basmati rice with tender chicken, spices, and saffron",
+      price: 16.99,
+      image: "https://images.unsplash.com/photo-1563379091339-03246963d293?w=300&h=200&fit=crop",
+      category: "Rice"
+    },
+    {
+      id: "6-2",
+      name: "Beef Karahi",
+      description: "Slow-cooked beef with tomatoes, ginger, and traditional spices",
+      price: 19.99,
+      image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=300&h=200&fit=crop",
+      category: "Main"
+    },
+    {
+      id: "6-3",
+      name: "Chicken Tikka",
+      description: "Marinated chicken grilled in tandoor with yogurt and spices",
+      price: 14.99,
+      image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300&h=200&fit=crop",
+      category: "Appetizer"
+    },
+    {
+      id: "6-4",
+      name: "Naan Bread",
+      description: "Fresh baked naan bread with garlic and butter",
+      price: 3.99,
+      image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=300&h=200&fit=crop",
+      category: "Bread"
+    },
+    {
+      id: "6-5",
+      name: "Lamb Seekh Kebab",
+      description: "Spiced ground lamb kebabs grilled to perfection",
+      price: 17.99,
+      image: "https://images.unsplash.com/photo-1630409346448-4ac8c53ca22c?w=300&h=200&fit=crop",
+      category: "Main"
+    },
+    {
+      id: "6-6",
+      name: "Gulab Jamun",
+      description: "Sweet milk dumplings in rose-flavored syrup",
+      price: 6.99,
+      image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=300&h=200&fit=crop",
+      category: "Dessert"
     }
   ]
 };
