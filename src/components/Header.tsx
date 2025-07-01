@@ -7,10 +7,17 @@ import { useNavigate } from "react-router-dom";
 interface HeaderProps {
   showSearch?: boolean;
   cartCount?: number;
+  onSearch?: (query: string) => void;
 }
 
-const Header = ({ showSearch = false, cartCount = 0 }: HeaderProps) => {
+const Header = ({ showSearch = false, cartCount = 0, onSearch }: HeaderProps) => {
   const navigate = useNavigate();
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (onSearch) {
+      onSearch(e.target.value);
+    }
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
@@ -33,6 +40,7 @@ const Header = ({ showSearch = false, cartCount = 0 }: HeaderProps) => {
                 <Input
                   placeholder="Search restaurants or food..."
                   className="pl-10 rounded-full"
+                  onChange={handleSearchChange}
                 />
               </div>
             </div>

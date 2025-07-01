@@ -12,9 +12,18 @@ const Menu = () => {
   const { restaurantId } = useParams<{ restaurantId: string }>();
   const navigate = useNavigate();
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState("All");
   
   const restaurant = mockRestaurants.find(r => r.id === restaurantId);
   const menuItems = mockMenuItems[restaurantId || ""] || [];
+  
+  // Get unique categories
+  const categories = ["All", ...Array.from(new Set(menuItems.map(item => item.category)))];
+  
+  // Filter items by category
+  const filteredItems = selectedCategory === "All" 
+    ? menuItems 
+    : menuItems.filter(item => item.category === selectedCategory);
   
   if (!restaurant) {
     return (
@@ -90,22 +99,38 @@ const Menu = () => {
         </div>
       </div>
 
-      {/* Menu Items */}
       <div className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-bold mb-6">Menu 📖</h2>
+        {/* Category Filter */}
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold mb-4">Menu Categories 📖</h2>
+          <div className="flex flex-wrap gap-2">
+            {categories.map((category) => (
+              <Button
+                key={category}
+                variant={selectedCategory === category ? "default" : "outline"}
+                size="sm"
+                onClick={() => setSelectedCategory(category)}
+                className="rounded-full"
+              >
+                {category}
+              </Button>
+            ))}
+          </div>
+        </div>
         
-        {menuItems.length === 0 ? (
+        {/* Menu Items */}
+        {filteredItems.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-lg text-muted-foreground mb-4">
-              Menu items coming soon! 🍽️
+              No items found in this category 🍽️
             </p>
-            <Button onClick={() => navigate("/")}>
-              Browse Other Restaurants
+            <Button onClick={() => setSelectedCategory("All")}>
+              View All Items
             </Button>
           </div>
         ) : (
           <div className="space-y-4">
-            {menuItems.map((item) => (
+            {filteredItems.map((item) => (
               <MenuItemCard
                 key={item.id}
                 item={item}
@@ -122,7 +147,7 @@ const Menu = () => {
           <Button
             size="lg"
             className="rounded-full shadow-lg animate-bounce-in"
-            onClick={() => navigate("/cart")}
+            onClick={() => navigate("/cart", { state: { cartItems: cart } })}
           >
             View Cart ({cartCount}) 🛒
           </Button>

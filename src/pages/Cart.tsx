@@ -1,6 +1,6 @@
 
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -11,8 +11,10 @@ import { toast } from "sonner";
 
 const Cart = () => {
   const navigate = useNavigate();
-  // Mock cart data - in real app this would come from global state
-  const [cartItems, setCartItems] = useState<CartItem[]>([
+  const location = useLocation();
+  
+  // Get cart items from navigation state or use mock data
+  const initialCartItems = location.state?.cartItems || [
     {
       id: "1-1",
       name: "Margherita Pizza",
@@ -31,7 +33,9 @@ const Cart = () => {
       category: "Pasta",
       quantity: 1
     }
-  ]);
+  ];
+
+  const [cartItems, setCartItems] = useState<CartItem[]>(initialCartItems);
 
   const updateQuantity = (id: string, newQuantity: number) => {
     if (newQuantity === 0) {
@@ -55,6 +59,16 @@ const Cart = () => {
   const total = subtotal + deliveryFee + tax;
 
   const handleCheckout = () => {
+    // Store order data for tracking
+    const orderData = {
+      id: `QB${Date.now()}`,
+      items: cartItems,
+      total: total,
+      timestamp: new Date(),
+      status: 'received'
+    };
+    
+    localStorage.setItem('currentOrder', JSON.stringify(orderData));
     toast.success("Order placed successfully! 🎉");
     navigate("/tracking");
   };
